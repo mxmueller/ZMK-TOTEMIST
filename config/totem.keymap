@@ -29,11 +29,11 @@
                 ;
         };
         
-        umlaut_ae: umlaut_ae {
+        umlaut_ae_lower: umlaut_ae_lower {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            wait-ms = <40>;
-            tap-ms = <40>;
+            wait-ms = <0>;
+            tap-ms = <1>;
             bindings
                 = <&macro_press &kp LALT>
                 , <&macro_tap &kp N0 &kp N0 &kp E &kp N4>
@@ -41,11 +41,23 @@
                 ;
         };
         
-        umlaut_oe: umlaut_oe {
+        umlaut_ae_upper: umlaut_ae_upper {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            wait-ms = <40>;
-            tap-ms = <40>;
+            wait-ms = <0>;
+            tap-ms = <1>;
+            bindings
+                = <&macro_press &kp LALT>
+                , <&macro_tap &kp N0 &kp N0 &kp C &kp N4>
+                , <&macro_release &kp LALT>
+                ;
+        };
+        
+        umlaut_oe_lower: umlaut_oe_lower {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <0>;
+            tap-ms = <1>;
             bindings
                 = <&macro_press &kp LALT>
                 , <&macro_tap &kp N0 &kp N0 &kp F &kp N6>
@@ -53,11 +65,23 @@
                 ;
         };
         
-        umlaut_ue: umlaut_ue {
+        umlaut_oe_upper: umlaut_oe_upper {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            wait-ms = <40>;
-            tap-ms = <40>;
+            wait-ms = <0>;
+            tap-ms = <1>;
+            bindings
+                = <&macro_press &kp LALT>
+                , <&macro_tap &kp N0 &kp N0 &kp D &kp N6>
+                , <&macro_release &kp LALT>
+                ;
+        };
+        
+        umlaut_ue_lower: umlaut_ue_lower {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <0>;
+            tap-ms = <1>;
             bindings
                 = <&macro_press &kp LALT>
                 , <&macro_tap &kp N0 &kp N0 &kp F &kp C>
@@ -65,16 +89,51 @@
                 ;
         };
         
+        umlaut_ue_upper: umlaut_ue_upper {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <0>;
+            tap-ms = <1>;
+            bindings
+                = <&macro_press &kp LALT>
+                , <&macro_tap &kp N0 &kp N0 &kp D &kp C>
+                , <&macro_release &kp LALT>
+                ;
+        };
+        
         umlaut_sz: umlaut_sz {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            wait-ms = <40>;
-            tap-ms = <40>;
+            wait-ms = <0>;
+            tap-ms = <1>;
             bindings
                 = <&macro_press &kp LALT>
                 , <&macro_tap &kp N0 &kp N0 &kp D &kp F>
                 , <&macro_release &kp LALT>
                 ;
+        };
+    };
+
+    behaviors {
+        ae_morph: ae_morph {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&umlaut_ae_lower>, <&umlaut_ae_upper>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+        
+        oe_morph: oe_morph {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&umlaut_oe_lower>, <&umlaut_oe_upper>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+        
+        ue_morph: ue_morph {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&umlaut_ue_lower>, <&umlaut_ue_upper>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
         };
     };
 
@@ -90,7 +149,7 @@
         combo_ae {
             timeout-ms = <50>;
             key-positions = <10 11>;
-            bindings = <&umlaut_ae>;
+            bindings = <&ae_morph>;
         };
         
         combo_sz {
@@ -102,13 +161,13 @@
         combo_ue {
             timeout-ms = <50>;
             key-positions = <6 7>;
-            bindings = <&umlaut_ue>;
+            bindings = <&ue_morph>;
         };
         
         combo_oe {
             timeout-ms = <50>;
             key-positions = <7 8>;
-            bindings = <&umlaut_oe>;
+            bindings = <&oe_morph>;
         };
     };
 
