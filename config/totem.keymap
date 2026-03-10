@@ -197,6 +197,14 @@
     combos {
         compatible = "zmk,combos";
 
+        conditional_layers {
+            compatible = "zmk,conditional-layers";
+            adj_layer {
+                if-layers = <NAV SYM>;
+                then-layer = <ADJ>;
+            };
+        };
+
         combo_esc {
             timeout-ms = <50>;
             key-positions = <0 1>;
