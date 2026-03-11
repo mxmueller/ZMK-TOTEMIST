@@ -17,15 +17,6 @@
 
 / {
     macros {
-        // CMD+A dann CMD+C
-        select_all_copy: select_all_copy {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <10>;
-            tap-ms = <10>;
-            bindings = <&kp LG(A)>, <&kp LG(C)>;
-        };
-
         gif: gif {
             label = "giphy";
             compatible = "zmk,behavior-macro";
@@ -37,7 +28,7 @@
                 , <&macro_tap &kp G &kp I &kp F>
                 ;
         };
-
+        
         umlaut_ae_lower: umlaut_ae_lower {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -49,7 +40,7 @@
                 , <&macro_release &kp LALT>
                 ;
         };
-
+        
         umlaut_ae_upper: umlaut_ae_upper {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -61,7 +52,7 @@
                 , <&macro_release &kp LALT>
                 ;
         };
-
+        
         umlaut_oe_lower: umlaut_oe_lower {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -73,7 +64,7 @@
                 , <&macro_release &kp LALT>
                 ;
         };
-
+        
         umlaut_oe_upper: umlaut_oe_upper {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -85,7 +76,7 @@
                 , <&macro_release &kp LALT>
                 ;
         };
-
+        
         umlaut_ue_lower: umlaut_ue_lower {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -97,7 +88,7 @@
                 , <&macro_release &kp LALT>
                 ;
         };
-
+        
         umlaut_ue_upper: umlaut_ue_upper {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -109,7 +100,7 @@
                 , <&macro_release &kp LALT>
                 ;
         };
-
+        
         umlaut_sz: umlaut_sz {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -124,49 +115,41 @@
     };
 
     behaviors {
-        // NEU: 1x = CMD+C, 2x = CMD+V, 3x = CMD+A dann CMD+C
-        td_cv: tap_dance_copy_paste_select {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&kp LG(C)>, <&kp LG(V)>, <&select_all_copy>;
-        };
-
         ae_morph: ae_morph {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             bindings = <&umlaut_ae_lower>, <&umlaut_ae_upper>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
-
+        
         oe_morph: oe_morph {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             bindings = <&umlaut_oe_lower>, <&umlaut_oe_upper>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
-
+        
         ue_morph: ue_morph {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             bindings = <&umlaut_ue_lower>, <&umlaut_ue_upper>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
-
+        
         comma_semi: comma_semi {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             bindings = <&kp COMMA>, <&kp SEMI>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
-
+        
         dot_colon: dot_colon {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             bindings = <&kp DOT>, <&kp COLON>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
-
+        
         minus_under: minus_under {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
@@ -177,31 +160,31 @@
 
     combos {
         compatible = "zmk,combos";
-
+        
         combo_esc {
             timeout-ms = <50>;
             key-positions = <0 1>;
             bindings = <&kp ESC>;
         };
-
+        
         combo_ae {
             timeout-ms = <50>;
             key-positions = <10 11>;
             bindings = <&ae_morph>;
         };
-
+        
         combo_sz {
             timeout-ms = <50>;
             key-positions = <11 12>;
             bindings = <&umlaut_sz>;
         };
-
+        
         combo_ue {
             timeout-ms = <50>;
             key-positions = <6 7>;
             bindings = <&ue_morph>;
         };
-
+        
         combo_oe {
             timeout-ms = <50>;
             key-positions = <7 8>;
@@ -213,42 +196,42 @@
         compatible = "zmk,keymap";
 
         base_layer {
-            label = "BASE";
+            label= "BASE";
             bindings = <
                 &kp Q       &kp W       &kp F       &kp P       &kp G           &kp J       &kp L       &kp U       &kp Y       &kp SEMI
                 &mt LGUI A  &mt LALT R  &mt LCTRL S &mt LSHFT T &kp D           &kp H       &mt RSHFT N &mt RCTRL E &mt RALT I  &mt RGUI O
     &kp Z       &kp Z       &kp X       &kp C       &kp V       &kp B           &kp K       &kp M       &kp COMMA   &kp DOT     &kp FSLH    &kp FSLH
-                                        &kp TAB     &td_cv      &lt NAV SPACE   &lt SYM RET &kp BSPC    &kp BSPC
+                                        &kp TAB     &kp TAB     &lt NAV SPACE   &lt SYM RET &kp BSPC    &kp BSPC
             >;
         };
 
         nav_layer {
-            label = "NAVI";
+            label= "NAVI";
             bindings = <
                 &kp ESC     &bt BT_CLR  &kp UP      &kp EQUAL   &kp LBRC        &kp RBRC    &kp KP_N7   &kp KP_N8   &kp KP_N9   &kp KP_PLUS
                 &kp LSHFT   &kp LEFT    &kp DOWN    &kp RIGHT   &kp LBKT        &kp RBKT    &kp KP_N4   &kp KP_N5   &kp KP_N6   &kp KP_MINUS
-    &trans      &kp DEL     &kp PG_UP   &kp CAPS    &kp PG_DN   &kp LPAR        &kp RPAR    &kp KP_N1   &kp KP_N2   &kp KP_N3   &kp KP_MULTIPLY &trans
-                                        &trans      &trans      &trans          &mo ADJ     &kp KP_N0   &trans
+    &trans      &kp DEL     &kp PG_UP   &kp CAPS    &kp PG_DN   &kp LPAR        &kp RPAR    &kp KP_N1   &kp KP_N2   &kp KP_N3   &kp KP_MULTIPLY &trans      
+                                        &trans      &trans      &trans          &mo ADJ     &kp KP_N0   &trans      
             >;
         };
 
         sim_layer {
-            label = "SYM";
+            label= "SYM";
             bindings = <
-                &kp EXCL    &kp AT      &kp HASH    &kp DLLR    &kp PRCNT       &kp CARET   &kp AMPS    &kp RA(U)   &kp SQT     &kp DQT
-                &kp RA(A)   &trans      &kp RA(S)   &trans      &trans          &kp C_MUTE  &kp LS(RA(N4)) &kp RA(N5) &kp RA(N4) &kp RA(O)
-    &trans      &kp RA(F18) &kp RA(F19) &trans      &trans      &trans          &kp C_VOL_DN &kp C_VOL_UP &kp C_PREV &kp C_NEXT &kp BSLH   &trans
-                                        &trans      &gif        &mo ADJ         &trans      &kp C_PP    &trans
+                &kp EXCL    &kp AT      &kp HASH    &kp DLLR    &kp PRCNT       &kp CARET   &kp AMPS    &kp RA(U)   &kp SQT     &kp DQT       
+                &kp RA(A)   &trans      &kp RA(S)   &trans      &trans          &kp C_MUTE  &kp LS(RA(N4)) &kp RA(N5) &kp RA(N4) &kp RA(O) 
+    &trans      &kp RA(F18) &kp RA(F19) &trans      &trans      &trans          &kp C_VOL_DN &kp C_VOL_UP &kp C_PREV &kp C_NEXT &kp BSLH   &trans         
+                                        &trans      &gif        &mo ADJ         &trans      &kp C_PP    &trans      
             >;
         };
 
         adjust_layer {
-            label = "ADJ";
+            label= "ADJ";
             bindings = <
-                &sys_reset  &bt BT_CLR  &out OUT_TOG &trans      &trans          &trans      &kp F7      &kp F8      &kp F9      &kp F12
-                &bootloader &bt BT_NXT  &trans      &trans      &trans          &trans      &kp F4      &kp F5      &kp F6      &kp F11
-    &trans      &trans      &bt BT_PRV  &trans      &trans      &trans          &trans      &kp F1      &kp F2      &kp F3      &kp F10     &trans
-                                        &trans      &trans      &trans          &trans      &trans      &trans
+                &sys_reset  &bt BT_CLR &out OUT_TOG &trans      &trans          &trans      &kp F7      &kp F8      &kp F9      &kp F12
+                &bootloader &bt BT_NXT  &trans      &trans      &trans          &trans      &kp F4      &kp F5      &kp F6      &kp F11  
+    &trans      &trans      &bt BT_PRV  &trans      &trans      &trans          &trans      &kp F1      &kp F2      &kp F3      &kp F10     &trans         
+                                        &trans      &trans      &trans          &trans      &trans      &trans      
             >;
         };
     };
