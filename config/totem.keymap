@@ -17,7 +17,7 @@
 
 / {
     macros {
-        // NEU: Alles markieren + kopieren
+        // CMD+A dann CMD+C
         select_all_copy: select_all_copy {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -124,20 +124,12 @@
     };
 
     behaviors {
-        // NEU: Tap Dance 1x = CMD+C, 2x = CMD+V
-        td_copy_paste: tap_dance_copy_paste {
+        // NEU: 1x = CMD+C, 2x = CMD+V, 3x = CMD+A dann CMD+C
+        td_cv: tap_dance_copy_paste_select {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&kp LG(C)>, <&kp LG(V)>;
-        };
-
-        // NEU: Mod-Morph normal = Tap Dance, Shift = CMD+A dann CMD+C
-        td_or_select: td_or_select {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&td_copy_paste>, <&select_all_copy>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&kp LG(C)>, <&kp LG(V)>, <&select_all_copy>;
         };
 
         ae_morph: ae_morph {
@@ -226,7 +218,7 @@
                 &kp Q       &kp W       &kp F       &kp P       &kp G           &kp J       &kp L       &kp U       &kp Y       &kp SEMI
                 &mt LGUI A  &mt LALT R  &mt LCTRL S &mt LSHFT T &kp D           &kp H       &mt RSHFT N &mt RCTRL E &mt RALT I  &mt RGUI O
     &kp Z       &kp Z       &kp X       &kp C       &kp V       &kp B           &kp K       &kp M       &kp COMMA   &kp DOT     &kp FSLH    &kp FSLH
-                                        &kp TAB     &td_or_select &lt NAV SPACE  &lt SYM RET &kp BSPC    &kp BSPC
+                                        &kp TAB     &td_cv      &lt NAV SPACE   &lt SYM RET &kp BSPC    &kp BSPC
             >;
         };
 
