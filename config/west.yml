@@ -5,7 +5,7 @@ manifest:
   projects:
   - name: zmk
     remote: zmkfirmware
-    revision: main
+    revision: 930b5cc0
     import: app/west.yml
   - name: zmk-keyboards-totem
     url: https://github.com/victorlucachi/zmk-keyboards-totem
